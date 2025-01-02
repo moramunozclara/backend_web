@@ -1,21 +1,31 @@
 import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-// import { conectar } from "./db.js";
+// import cors from "cors";
+// import dotenv from "dotenv";
+import  conectarDB  from "./db.js";
 
 
-dotenv.config();
+// dotenv.config();
 
 const servidor = express();
 const PORT = process.env.PORT || 4000;
 
-servidor.use(cors());
+conectarDB(); // Conectar a la base de datos en MongoDB
+
+// servidor.use(cors());
 servidor.use(express.json());
+// servidor.use("/api/items", itemRoutes);
 
 
 // Ruta de prueba
 servidor.get("/", (req, res) => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    res.send(`Primera prueba de peticiones GET de mi CRUD`);
 });
 
-servidor.listen(process.env.PORT);
+servidor.use(express.static("pruebas")); // Carpeta de pruebas con index.html temporal
+
+
+servidor.listen(PORT, () => {
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+});
+
+
