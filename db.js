@@ -16,5 +16,4 @@ function conectarDB() {
     });
 }
 
-
 export default conectarDB;
