@@ -1,8 +1,11 @@
+// ES MODULES
 import express from "express";
-// import cors from "cors";
+import cors from "cors";
 // import dotenv from "dotenv";
 import  conectarDB  from "./db.js";
 import Item from "./models/Item.js";
+import router from "./routes/itemRoutes.js";
+
 
 
 // dotenv.config();
@@ -12,9 +15,24 @@ const PORT = process.env.PORT || 4000;
 
 conectarDB(); // Conectar a la base de datos en MongoDB
 
-// servidor.use(cors());
-servidor.use(express.json());
-// servidor.use("/api/items", itemRoutes);
+// ---------------------------
+//        Middlewares
+// ---------------------------
+servidor.use(cors()); // Para aceptar la recepción de peticiones
+servidor.use(express.json()); // Para recibir datos en formato JSON
+servidor.use(express.urlencoded({extended:true})); // Para recibir datos de formularios
+
+// Hacer pública la carpeta Public
+servidor.use(express.static('public'));
+
+// ---------------------------
+//     Ruta BASE de la URL
+// ---------------------------
+
+// rutas con mongodb
+servidor.use("/API/v1/items", router);
+
+
 
 
 // // Ruta de prueba
@@ -23,11 +41,11 @@ servidor.use(express.json());
 // });
 
 // // Crear un item
-export function crearItem(title, description) { // probar con crearItem();
+export function crearItem(name, description, price) { // probar con crearItem();
     return new Promise(async (resolve, reject) => {
         try {
 
-            const newItem = new Item({ title, description });
+            const newItem = new Item({ name, description, price });
             const savedItem = await newItem.save();
             console.log("Nuevo item creado con éxito:", savedItem); //console.log para informes de éxito
             resolve(savedItem); // Devolver el item creado (para express)
@@ -58,10 +76,10 @@ export function leerItems() {
 }
 
 // // Actualizar un Item
-export function actualizarItem(id, title, description) {
+export function actualizarItem(id, name, description, price) {
     return new Promise(async (resolve, reject) => {
         try {
-            const nuevosDatos = { title, description }; // Datos a actualizar
+            const nuevosDatos = { name, description, price }; // Datos a actualizar
             const itemActualizado = await Item.findByIdAndUpdate(id, nuevosDatos, 
             {
                 new: true, // Documento actualizado
@@ -115,6 +133,20 @@ export function borrarItem(id) { // borrar basado en su ID
 servidor.use(express.static("pruebas")); // Carpeta de pruebas con index.html temporal
 
 
+// ---------------------------
+//   Middleware de Manejo de Errores
+// ---------------------------
+servidor.use((err, req, res, next) => {
+    console.error('Error en la API:', err);  // Para depuración
+    res.status(500).json({
+      status: "error",
+      msg: "Error en la API",
+      error: err.message
+    });
+  });
+  
+
+// Iniciar el servidor // Aviso en consola
 servidor.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
