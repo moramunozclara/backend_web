@@ -5,14 +5,14 @@ import { crearItem, leerItems, actualizarItem, borrarItem } from "../index.js";
 const router = Router(); 
 
 // Definir una ruta GET para obtener los items
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
     try {
         const productos = await leerItems();
         // res.json({ mensaje: "Aquí están los productos" });
         res.status(200).json(productos); // status 200: éxito
         
     } catch (error) {
-        res.status(500).json({ error: "Error al obtener los productos" }); // error en la API
+        next(error); // cada next aterriza en el middleware global de error definido en index.js
     }
 
 });
@@ -21,38 +21,35 @@ router.get("/", async (req, res) => {
     
 
 // Crear un producto
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
     const { name, description, price } = req.body;
     try {
         const nuevoProducto = await crearItem(name, description, price);
         res.status(201).json(nuevoProducto); // status 201: recurso creado
 
     } catch (error) {
-        res.status(500).json({ error: "Error al crear el producto" }); // error en la API
-    }
+        next(error);    }
 });
 
 // Actualizar un producto individual
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res, next) => {
     const { id } = req.params;
     const { name, description, price } = req.body;
     try {
         const productoActualizado = await actualizarItem(id, name, description, price);
         res.json(productoActualizado);
     } catch (error) {
-        res.status(500).json({ error: "Error al actualizar el producto" }); // error en la API
-    }
+        next(error);    }
 });
 
 // Borrar un producto individual
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
         const productoEliminado = await borrarItem(id);
         res.status(200).json(productoEliminado); // status 200: éxito
     } catch (error) {
-        res.status(500).json({ error: "Error al borrar el producto" }); // error en la API
-    }
+        next(error);    }
 });
 
 export default router;
