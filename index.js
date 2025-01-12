@@ -132,6 +132,11 @@ export function borrarItem(id) { // borrar basado en su ID
 
 servidor.use(express.static("pruebas")); // Carpeta de pruebas con index.html temporal
 
+// ---------------------------
+//     Ruta BASE del DOMAIN
+// ---------------------------
+servidor.use("/api/v1/", router);
+
 
 // ---------------------------
 //   Middleware de Manejo de Errores

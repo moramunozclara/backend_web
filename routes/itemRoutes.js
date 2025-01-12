@@ -5,7 +5,7 @@ import { crearItem, leerItems, actualizarItem, borrarItem } from "../index.js";
 const router = Router(); 
 
 // Definir una ruta GET para obtener los items
-router.get("/", async (req, res, next) => {
+router.get("/items", async (req, res, next) => {
     try {
         const productos = await leerItems();
         // res.json({ mensaje: "Aquí están los productos" });
@@ -21,7 +21,7 @@ router.get("/", async (req, res, next) => {
     
 
 // Crear un producto
-router.post("/", async (req, res, next) => {
+router.post("/items", async (req, res, next) => {
     const { name, description, price } = req.body;
     try {
         const nuevoProducto = await crearItem(name, description, price);
@@ -32,7 +32,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // Actualizar un producto individual
-router.put("/:id", async (req, res, next) => {
+router.put("/items/:id", async (req, res, next) => {
     const { id } = req.params;
     const { name, description, price } = req.body;
     try {
@@ -43,7 +43,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 // Borrar un producto individual
-router.delete("/:id", async (req, res, next) => {
+router.delete("/items/:id", async (req, res, next) => {
     const { id } = req.params;
     try {
         const productoEliminado = await borrarItem(id);
