@@ -17,8 +17,19 @@ router.get("/items", async (req, res, next) => {
 
 });
 
-// Definir una ruta GET para obtener items por su id (item individual)
-    
+// Definir una ruta GET para obtener items por su ID (ruta de item individual)
+router.get("/items/:id", async (req, res, next) => {
+    try {
+        const { id } = req.params; // utiliza el ID del producto en la URL para buscarlo en la database
+        const producto = await Item.findById(id); // busca el producto en la base de datos por su ID
+        if (!producto) {
+            return res.status(404).json({ error: "Producto no encontrado" });
+        }
+        res.status(200).json(producto); // status 200: éxito
+    } catch (error) {
+        next(error);
+    }
+})
 
 // Crear un producto
 router.post("/items", async (req, res, next) => {
@@ -28,7 +39,8 @@ router.post("/items", async (req, res, next) => {
         res.status(201).json(nuevoProducto); // status 201: recurso creado
 
     } catch (error) {
-        next(error);    }
+        next(error);    
+    }
 });
 
 // Actualizar un producto individual
@@ -37,7 +49,7 @@ router.put("/items/:id", async (req, res, next) => {
     const { name, description, price, servicesList, type  } = req.body;
     try {
         const productoActualizado = await actualizarItem(id, name, description, price, servicesList, type );
-        res.json(productoActualizado);
+        res.status(200).json(productoActualizado);  // status 200: éxito
     } catch (error) {
         next(error);    }
 });
