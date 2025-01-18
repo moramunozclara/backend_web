@@ -21,7 +21,10 @@ const itemSchema = new mongoose.Schema({
     price: { 
         type: Number, 
         required: true 
-    }
+    },
+    image: 
+    { type: String } // la ruta de la imagen
+
 },
 { timestamps: true, // timestamps: true agrega createdAt y updatedAt
     strict:false // strict:false me permite usar campos adicionales
