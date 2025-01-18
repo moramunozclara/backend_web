@@ -22,9 +22,9 @@ router.get("/items", async (req, res, next) => {
 
 // Crear un producto
 router.post("/items", async (req, res, next) => {
-    const { name, description, price } = req.body;
+    const { name, description, price, servicesList, type } = req.body;
     try {
-        const nuevoProducto = await crearItem(name, description, price);
+        const nuevoProducto = await crearItem(name, description, price, servicesList, type );
         res.status(201).json(nuevoProducto); // status 201: recurso creado
 
     } catch (error) {
@@ -34,9 +34,9 @@ router.post("/items", async (req, res, next) => {
 // Actualizar un producto individual
 router.put("/items/:id", async (req, res, next) => {
     const { id } = req.params;
-    const { name, description, price } = req.body;
+    const { name, description, price, servicesList, type  } = req.body;
     try {
-        const productoActualizado = await actualizarItem(id, name, description, price);
+        const productoActualizado = await actualizarItem(id, name, description, price, servicesList, type );
         res.json(productoActualizado);
     } catch (error) {
         next(error);    }
