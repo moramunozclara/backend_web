@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { crearItem, leerItems, actualizarItem, borrarItem } from "../index.js";
+import Item from "../models/Item.js";
+
 
 
 const router = Router(); 
