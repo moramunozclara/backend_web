@@ -1,0 +1,50 @@
+[
+    {
+      "image": "prueba.png",
+      "_id": "677f01a81b92a7a6d8493ea6",
+      "name": "Isla privada del silencio",
+      "description": "Evita que cualquier escándalo salga a la luz, inspirado en la famosa mansión de un conocido magnate. Incluye:",
+      "servicesList": [
+        "Manipulación de registros de vuelo y viajes",
+        "Compra de testimonios y silenciamiento de testigos",
+        "Sobornos a las víctimas, autoridades locales e internacionales",
+        "Creación de fundaciones caritativas",
+        "Presión sobre los medios para evitar filtraciones"
+      ],
+      "type": ["Ocio"],
+      "price": 600000000,
+      "imageUrl": "lsl4.png"
+    },
+    {
+      "image": "prueba.png",
+      "_id": "677f01a81b92a7a6d8493ea7",
+      "name": "Vertidos navales prestigiosos",
+      "description": "Este paquete exclusivo incluye:",
+      "servicesList": [
+        "Sobornos a autoridades medioambientales",
+        "Manipulación de medios de comunicación para desviar la atención",
+        "Compensaciones a las víctimas para evitar demandas",
+        "Neutralización de investigadores"
+      ],
+      "type": ["Medioambiental"],
+      "price": 800000000,
+      "imageUrl": "v3rtld02n4v4l32.png"
+    },
+    {
+      "image": "prueba.png",
+      "_id": "677f01a81b92a7a6d8493ea8",
+      "name": "Moda sin huella élite",
+      "description": "Protege tu empresa de moda de cualquier controversia por condiciones laborales o evasiones fiscales. Este paquete incluye:",
+      "servicesList": [
+        "Donaciones de material médico y caritativas en el país de evasión",
+        "Campañas destacando tus contribuciones sociales",
+        "Certificaciones ambientales falsas",
+        "Creación de programas de reciclaje ficticios",
+        "Sobornos a inspectores laborales y fiscales en países tercermundistas"
+      ],
+      "type": ["Medioambiental", "Evasión"],
+      "price": 1200000000,
+      "imageUrl": "m0d4slnhv3ll4.png"
+    }
+  ]
+  

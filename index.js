@@ -25,6 +25,11 @@ servidor.use(express.urlencoded({extended:true})); // Para recibir datos de form
 // Hacer pública la carpeta Public
 servidor.use(express.static('public'));
 
+// Ruta para servir el archivo de prueba JSON
+servidor.get("/api/v1/productos-prueba", (req, res) => {
+    res.sendFile(path.join(__dirname, "data", "productos-prueba.json"));
+});
+
 // ---------------------------
 //     Ruta BASE de la URL
 // ---------------------------
