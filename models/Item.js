@@ -23,7 +23,7 @@ const itemSchema = new mongoose.Schema({
         required: true 
     },
     image: 
-    { type: String } // la ruta de la imagen
+    { type: String, default:  "prueba.png" } // ruta a la imagen. si no se especifica, se usa la imagen por defecto
 
 },
 { timestamps: true, // timestamps: true agrega createdAt y updatedAt

@@ -35,9 +35,9 @@ router.get("/items/:id", async (req, res, next) => {
 
 // Crear un producto
 router.post("/items", async (req, res, next) => {
-    const { name, description, price, servicesList, type } = req.body;
+    const { name, description, price, servicesList, type, imageUrl = "prueba.png"} = req.body;
     try {
-        const nuevoProducto = await crearItem(name, description, price, servicesList, type );
+        const nuevoProducto = await crearItem(name, description, price, servicesList, type, imageUrl );
         res.status(201).json(nuevoProducto); // status 201: recurso creado
 
     } catch (error) {
