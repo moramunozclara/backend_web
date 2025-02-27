@@ -22,7 +22,7 @@ const itemSchema = new mongoose.Schema({
         type: Number, 
         required: true 
     },
-    image: 
+    imageUrl: 
     { type: String, default:  "prueba.png" } // ruta a la imagen. si no se especifica, se usa la imagen por defecto
 
 },

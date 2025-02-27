@@ -41,11 +41,11 @@ servidor.use("/API/v1/items", router);
 // });
 
 // // Crear un item
-export function crearItem(name, description, price, servicesList =[], type = [], imageUrl = "prueba.png") { // probar con crearItem();
+export function crearItem(name, description, price, servicesList =[], type = [], imageUrl ) { // probar con crearItem();
     return new Promise(async (resolve, reject) => {
         try {
 
-            const newItem = new Item({ name, description, price, servicesList, type, imageUrl });
+            const newItem = new Item({ name, description, price, servicesList, type, imageUrl: imageUrl || "prueba.png"  }); //imageurl si se envía una imagen, o imagen de prueba
             const savedItem = await newItem.save();
             console.log("Nuevo item creado con éxito:", savedItem); //console.log para informes de éxito
             resolve(savedItem); // Devolver el item creado (para express)
